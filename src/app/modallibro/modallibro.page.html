@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actulizar Libro</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-item>
+  <h2>Editar Libro</h2>
+  <ion-label position="stacked">Nombre</ion-label>
+  <ion-input [(ngModel)]="libro.titulo" placeholder="Titulo del Libro"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Autor</ion-label>
+    <ion-select [(ngModel)]="libro.autorId" >
+      <ion-select-option *ngFor="let aut of autores" [value]="aut.id">{{aut.nombre}}</ion-select-option>
+    </ion-select>
+</ion-item>
+<ion-button (click)="updateLibro()">
+  Actualizar
+</ion-button>
+<ion-content>
+
+</ion-content>

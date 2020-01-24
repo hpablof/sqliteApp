@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>modalautor</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <div *ngIf="sectionEditAutor">
+    <ion-item>
+      <h2>Editar Autor</h2>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="autor.nombre" placeholder="Nombre del Autor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Genero</ion-label>
+      <ion-input [(ngModel)]="autor.genero" placeholder="Genero de preferencia"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Foto</ion-label>
+      <ion-input [(ngModel)]="autor.img" placeholder="Genero de preferencia"></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="primary" (click)="updateAutor()">Actualizar</ion-button>
+  </div>
+  <div *ngIf="sectionDetailAutor">
+    <span>Detail</span>
+  </div>
+<ion-content>
+
+
+  <ion-button (click)="closeModal()">Close Modal</ion-button>
+
+</ion-content>

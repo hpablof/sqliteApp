@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mi biblioteca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="selectedView">
+    <ion-segment-button value="autors">
+      <ion-label>Autores</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="books">
+      <ion-label>Libros</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="selectedView">
+      <div *ngSwitchCase="'autors'">
+        <ion-item>
+          <ion-label position="stacked">Cual es el Autor?</ion-label>
+          <ion-input [(ngModel)]="autor.nombre" placeholder="Nombre del Autor"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Cual es el genero que escribe el autor?</ion-label>
+          <ion-input [(ngModel)]="autor.genero" placeholder="Genero de preferencia"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Foto</ion-label>
+          <ion-input [(ngModel)]="autor.img" placeholder="Genero de preferencia"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="addAutorP()">Agregar Autor</ion-button>
+
+        <!-- <ion-list>
+          <ion-item button *ngFor="let aut of autores" [routerLink]="['/','autores', aut.id]" (click)="modalAutor()" >
+            <ion-avatar slot="start">
+              <img [src]="aut.img" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ aut.nombre }}</h2>
+              <p>{{ aut.genero }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list> -->
+
+        <ion-list>
+          <ion-item-sliding *ngFor="let aut of autores" >
+            <ion-item>
+            <ion-avatar slot="start">
+              <img [src]="aut.img" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ aut.nombre }}</h2>
+              <p>{{ aut.genero }}</p>
+            </ion-label>
+          </ion-item>
+            <ion-item-options side="end">
+              <!-- <ion-item-option color="primary" (click)="modalAutor('detail', aut.id)">Detail</ion-item-option> -->
+              <ion-item-option color="warning" (click)="modalAutor('edit', aut.id)">Edit</ion-item-option>
+              <ion-item-option color="danger" (click)="deleteAutor(aut.id)">Delete</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+      <div *ngSwitchCase="'books'">
+        <ion-item>
+          <ion-label position="stacked">Libros</ion-label>
+          <ion-input [(ngModel)]="libro.titulo" placeholder="Titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Autor</ion-label>
+            <ion-select [(ngModel)]="libro.autorId" >
+              <ion-select-option *ngFor="let aut of autores" [value]="aut.id">{{aut.nombre}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button expand="block" (click)="addLibroP()">Agregar libro</ion-button>
+
+        <!-- <ion-list>
+          <ion-item *ngFor="let book of libros | async">
+            <ion-label>
+              <h4>{{book.titulo}}</h4>
+              <small><strong>Autor:</strong> {{book.autor}}</small>
+            </ion-label>
+          </ion-item>
+        </ion-list> -->
+
+        <ion-list >
+          <ion-item-sliding *ngFor="let book of libros | async">
+            <ion-item >
+              <ion-label>
+                <h4>{{book.titulo}}</h4>
+                <small><strong>Autor:</strong> {{book.autor}}</small>
+              </ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="warning" (click)="modalLibro(book.id)" >Edit</ion-item-option>
+              <ion-item-option color="danger" (click)="deleteLibro(book.id)" >Delete</ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+  </div>
+</ion-content>
