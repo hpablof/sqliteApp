@@ -148,6 +148,7 @@ export class DatabaseService {
         this.loadLibros();
       });
   }
+  
   updateLibro(libro:any){
     let data=[libro.titulo, libro.autorId];
     return this.database.executeSql(`UPDATE obra SET titulo = ?, autorId = ? WHERE id = ${libro.id}`, data)
